@@ -1,68 +1,64 @@
+// Emilie Ratelle 
+// Nicholas Brown
+// Web and Effects, section 1
+// Hockey practice
+// https://openprocessing.org/sketch/1881800 
+/* (Instruction)
+//click on the puck with the mouse to make the puck moves/ to make your slap-shot. 
+// when the puck enters the goal, click on the press bar to resest the puck to its original postiton, and to add a point to the counter on the right corner. 
+(Analysis/artist statement)
+My interaction is about a hockey player who is practising his slap shot for his hockey game. He counts the number of time he scores to help him be better. My interaction is about perseverance, and patience. Two thighs you need to be a good hockey player!
+*/
 
-hockey part 2
-by emilie
-  
 
- 
-//click on the hockey puck until it is completely in the goal 
-// click on the space bar to reset the hockey puck at its original position 
-​
-​
+
 let bg;
 let circleX, circleY;
 let circleSize = 100;
 let circleStartX, circleStartY;
-​
+let newImage;
+let newImageSize = 500;
+let counter = 0; // initialize counter to 0
+
 function preload() {
   bg = loadImage("but.jpeg");
+  newImage = loadImage("stick.webp");
 }
-​
+
 function setup() {
-  createCanvas(2500, 1200);
-  circleStartX = width / 2; // save the starting position of the circle
+  createCanvas(2000, 1000);
+  circleStartX = width / 2; 
   circleStartY = height / 2;
-  circleX = circleStartX;  // initialize circle position to starting position
+  circleX = circleStartX; 
   circleY = circleStartY;
 }
-​
+
 function draw() {
-  // draw the background image
-  image(bg, 800, 200);
-​
-  // draw the brown circle (the hockey puck)
+  image(bg, 0, 0, width, height);
   fill(51, 25, 0);
   noStroke();
   circle(circleX, circleY, circleSize);
+  image(newImage, mouseX, mouseY, newImageSize, newImageSize);
+
+  // display the counter value in the top-right corner
+  textSize(60);
+  textAlign(RIGHT, TOP);
+  fill(0);
+  text("Count: " + counter, width - 20, 20);
 }
-​
+
 function mousePressed() {
-  // check if the mouse is inside the circle
   let d = dist(mouseX, mouseY, circleX, circleY);
   if (d < circleSize / 2) {
-    // move the circle to a random position
-    circleX = random(800 + circleSize / 2, 800 + bg.width - circleSize / 2);
-    circleY = random(200 + circleSize / 2, 200 + bg.height - circleSize / 2);
+    circleX = random(circleSize / 2, width - circleSize / 2);
+    circleY = random(circleSize / 2, height - circleSize / 2);
   }
 }
-​
+
 function keyPressed() {
-  // check if space key is pressed
   if (keyCode === 32) {
-    // reset circle position to starting position
     circleX = circleStartX;
     circleY = circleStartY;
+    counter++; // increment the counter variable by 1
   }
 }
-SKETCH
-FILES
-EDITOR
-Select mode or a template 
-
-Write step-by-step tutorials. Learn more
-
-Centers sketch and matches the background color.
-
-Prevents infinite loops that may freeze the sketch.
-p5.sound
-OP Configurator 3000
-Join Plus+ for private sketches, version history, custom embeds, and more!
